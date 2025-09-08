@@ -1,11 +1,377 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+title: "Mi Portafolio"
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px; /* Ancho más amplio */
+            margin: auto;
+            padding: 20px;
+            background-color: #2c3e50; /* Fondo azul marino */
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border: 2px solid #3498db;
+            text-align: center; /* Centrar texto */
+        }
+        h1, h2, h3, h4 {
+            color: #bdc3c7; /* Color gris */
+            margin: 0; /* Eliminar margen */
+        }
+        .highlight {
+            color: #e74c3c; /* Color rojo para resaltar */
+        }
+        .highlight-yellow {
+            color: #f1c40f; /* Color amarillo */
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px; /* Espaciado entre iconos */
+            justify-content: center; /* Centrar iconos */
+            margin-top: 10px; /* Espaciado superior */
+        }
+        .social-icon {
+            width: 40px; /* Tamaño de los iconos */
+            height: 40px; /* Tamaño de los iconos */
+            filter: brightness(0) invert(1); /* Hacer iconos blancos */
+        }
+        img {
+            border-radius: 50%;
+            border: 4px solid #3498db;
+            display: block;
+            margin: 0 auto 20px;
+            width: 180px; /* Ajustar tamaño de la imagen */
+            height: 180px; /* Ajustar tamaño de la imagen */
+        }
+        .profile-container {
+            display: flex;
+            align-items: flex-start; /* Alinear elementos al inicio */
+            justify-content: space-between; /* Espacio entre imagen y enlaces */
+            margin-top: 10px; /* Espacio superior */
+        }
+        .profile-description {
+            text-align: left; /* Alinear texto a la izquierda */
+            background-color: #34495e; /* Fondo del cuadro de descripción */
+            padding: 15px; /* Espaciado interno */
+            border-radius: 8px; /* Bordes redondeados */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Sombra */
+            width: 100%; /* Ancho completo */
+            max-width: 400px; /* Ancho máximo para el cuadro */
+            margin-left: 20px; /* Margen izquierdo para separar de la imagen */
+        }
+        .experience-container {
+            max-width: 800px; /* Ancho igual al contenedor principal */
+            margin: 40px auto 0; /* Centrar con margen superior */
+            padding: 20px;
+            background-color: #2c3e50; /* Fondo azul marino */
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border: 2px solid #3498db; /* Borde azul */
+            text-align: left; /* Alinear texto a la izquierda */
+        }
+        .experience-title {
+            text-align: center; /* Centrar título de experiencia */
+            margin: 40px 0 20px; /* Espacio superior e inferior */
+        }
+        .experience-section {
+            margin-top: 10px; /* Espacio entre título y contenido */
+            display: flex; /* Usar flexbox para alinear el icono y el texto */
+            align-items: center; /* Centrar verticalmente */
+        }
+        .experience-icon {
+            width: 30px; /* Tamaño del icono */
+            height: 30px; /* Tamaño del icono */
+            margin-right: 10px; /* Espacio entre el icono y el texto */
+        }
+
+        .projects-container {
+            display: flex; /* Flexbox para alinear los proyectos */
+            justify-content: center; /* Centrar en el contenedor */
+            gap: 35px; /* Espacio pequeño entre proyectos */
+            margin-top: 15px; /* Menos separación arriba */
+        }
+        .project {
+            background-color: #2c3e50;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            width: 35%;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación suave */
+        }
+        .project:hover {
+            transform: translateY(-8px) scale(1.02); /* Se eleva y crece un poco */
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5); /* Resplandor azul */
+        }
+        .project::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            animation: pulse 2s infinite;
+            z-index: -1; /* Colocar detrás del contenido */
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px; /* Menos padding en pantallas pequeñas */
+            }
+            h1 {
+                font-size: 2.5rem; /* Ajustar tamaño de fuente en móviles */
+            }
+            h2 {
+                font-size: 1.5rem; /* Ajustar tamaño de fuente en móviles */
+            }
+            .profile-container {
+                flex-direction: column; /* Cambiar a columna en pantallas pequeñas */
+                align-items: center; /* Centrar elementos */
+            }
+            .profile-description {
+                max-width: 100%; /* Ancho completo en móviles */
+                margin-left: 0; /* Sin margen en móviles */
+            }
+            .projects-container {
+                flex-direction: column; /* Cambiar a columna en móviles */
+            }
+            .project {
+                width: 100%; /* Ancho completo en móviles */
+                margin-bottom: 10px; /* Margen inferior entre proyectos */
+            }
+        }
+
+        .tech-stack {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 25px;
+                margin: 20px 0 40px;
+                text-align: center;
+            }
+
+            .tech-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 110px;
+            }
+
+            .tech-icon {
+                width: 50px;
+                height: 50px;
+                transition: transform 0.3s ease, filter 0.3s ease;
+                filter: drop-shadow(0 0 4px #3498db);
+            }
+
+            .tech-icon:hover {
+                transform: scale(1.2);
+                filter: drop-shadow(0 0 10px #3498db);
+            }
+
+            .tech-item p {
+                margin-top: 8px;
+                font-size: 12px;
+                color: #ecf0f1;
+            }
+    </style>
+
+    <style>
+    /* Animación de borde azul delgado */
+    @keyframes borderGlowBlue {
+        0% {
+            box-shadow: 0 0 4px #3498db, 0 0 6px #3498db;
+        }
+        50% {
+            box-shadow: 0 0 8px #3498db, 0 0 12px #3498db;
+        }
+        100% {
+            box-shadow: 0 0 4px #3498db, 0 0 6px #3498db;
+        }
+    }
+
+    /* Aplicar bordes animados a los marcos */
+    .container,
+    .experience-container,
+    .project {
+        border: 2px solid #3498db;
+        animation: borderGlowBlue 2.5s infinite alternate;
+    }
+</style>
+
+
+</head>
+<body>
+    <div class="container">
+        <!-- Nombre y puesto -->
+        <header>
+            <h1 class="text-4xl font-bold">Ramón Reyes Del Angel</h1>
+            <h2 class="text-xl highlight-yellow">Desarrollador de Software</h2>
+            <p class="italic">"La tecnología es el futuro, y yo soy parte de su creación."</p>
+        </header>
+
+        <!-- Foto de perfil y enlaces -->
+        <div class="profile-container">
+            <img src="../src/Captura.jpg" alt="Foto de perfil" />
+            <div>
+                <div class="social-icons">
+                    <a href="mailto:ramonreyesdelangel@gmail.com">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/email.png" class="social-icon" alt="Email" />
+                    </a>
+                    <a href="tel:+528334359229">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/phone.png" class="social-icon" alt="Teléfono" />
+                    </a>
+                    <a href="https://www.google.com/maps/place/Altamira,+Tamaulipas" target="_blank">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/place-marker.png" class="social-icon" alt="Ubicación" />
+                    </a>
+                    <a href="https://linkedin.com/in/tu-perfil" target="_blank">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" class="social-icon" alt="LinkedIn" />
+                    </a>
+                    <a href="https://github.com/tu-github" target="_blank">
+                        <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" class="social-icon" alt="GitHub" />
+                    </a>
+                </div>
+
+                <!-- Descripción personal en un cuadro -->
+                <div class="profile-description">
+                    <p>Hola, soy Ramón, tengo 20 años y tengo experiencia en el desarrollo de aplicaciones orientadas a la gestión de ventas e inventarios.</p>
+                    <p>Me considero una persona analítica, responsable y con gran interés en aprender nuevas herramientas y frameworks como Astro y React. Mi objetivo es seguir desarrollando soluciones tecnológicas que optimicen procesos y aporten valor a las empresas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Título de Experiencia Profesional centrado -->
+    <h3 class="experience-title">EXPERIENCIA PROFESIONAL</h3>
+
+    <!-- Sección de Experiencia Profesional en un contenedor separado -->
+    <div class="experience-container">
+        <img src="../src/image.png" class="experience-icon" alt="Icono de tienda" />
+        <p><strong>Tiendita Evenezer</strong></p>
+        <p>Desarrollador del sistema de punto de venta | Ciudad, País | 00/2025 - 00/2025</p>
+        <p>Contacto de la tienda:</p>
+        <p>-</p>
+        <p><strong>Actividades:</strong></p>
+        <ul>
+            <li>Diseño y desarrollo del sistema de punto de venta.</li>
+            <li>Gestión y optimización de la Base de Datos.</li>
+            <li>Mantenimiento al Punto de Venta.</li>
+        </ul>
+    </div>
+
+    <!-- Título de Proyectos -->
+    <h3 class="experience-title">PROYECTOS</h3>
+
+    <!-- Contenedor para los proyectos -->
+    <div class="projects-container">
+        <div class="project">
+            <img src="../src/tiendita1.png"
+                alt="Tiendita 1" 
+                style="width:100%; border-radius:6px; margin-bottom:10px;">
+            <h4>Punto de Venta (C# y Java)</h4>
+            <p>XAMPP (MySQL) | 2024 - 2024</p>
+            <ul>
+                <li>Desarrollo de un sistema de punto de venta con C# y Java.</li>
+                <li>Integración y gestión de base de datos con MySQL usando XAMPP.</li>
+                <li>Diseño de interfaz para control de ventas e inventario.</li>
+            </ul>
+        </div>
+        <div class="project">
+            <img src="../src/tiendita2.png"
+                alt="Tiendita 2" 
+                style="width:100%; border-radius:6px; margin-bottom:10px;">
+            <h4>Punto de Venta (Laravel y PHP)</h4>
+            <p>XAMPP (MySQL) | 2025 - 2025</p>
+            <ul>
+                <li>Implementación de un sistema de punto de venta utilizando Laravel y PHP.</li>
+                <li>Gestión de inventarios y transacciones con MySQL.</li>
+                <li>Diseño responsivo y estructuración de módulos para usuarios y venta.</li>
+            </ul>
+        </div>
+    </div>
+
+        <!-- Título de Habilidades -->
+    <h3 class="experience-title">TECNOLOGÍAS Y HERRAMIENTAS</h3>
+
+    <!-- Contenedor de tecnologías -->
+    <div class="tech-stack">
+        <div class="tech-item">
+            <a href="https://laravel.com" target="_blank">
+                <img src="../src/laravel.png" alt="Laravel" class="tech-icon" />
+            </a>
+            <p>Framework PHP (Laravel)</p>
+        </div>
+        <div class="tech-item">
+            <a href="https://www.python.org" target="_blank">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="tech-icon" />
+            </a>
+            <p>Lenguaje de Programación (Python)</p>
+        </div>
+        <div class="tech-item">
+            <a href="https://www.java.com" target="_blank">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" class="tech-icon" />
+            </a>
+            <p>Lenguaje de Programación (Java)</p>
+        </div>
+        <div class="tech-item">
+            <a href="https://learn.microsoft.com/dotnet/csharp/" target="_blank">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#" class="tech-icon" />
+            </a>
+            <p>Lenguaje de Programación (C#)</p>
+        </div>
+        <div class="tech-item">
+            <a href="https://www.php.net" target="_blank">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" class="tech-icon" />
+            </a>
+            <p>Lenguaje de Programación (PHP)</p>
+        </div>
+        <div class="tech-item">
+            <a href="https://www.microsoft.com/sql-server" target="_blank">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="SQL Server" class="tech-icon" />
+            </a>
+            <p>Gestor de Bases de Datos (SQL Server)</p>
+        </div>
+        <div class="tech-item">
+            <a href="https://www.mysql.com" target="_blank">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" class="tech-icon" />
+            </a>
+            <p>Gestor de Bases de Datos (MySQL)</p>
+        </div>
+        <div class="tech-item">
+            <a href="https://astro.build" target="_blank">
+                <img src="https://raw.githubusercontent.com/withastro/docs/main/public/favicon.svg" alt="Astro" class="tech-icon" />
+            </a>
+            <p>Framework Web (Astro)</p>
+        </div>
+    </div>
+</body>
+</html>
