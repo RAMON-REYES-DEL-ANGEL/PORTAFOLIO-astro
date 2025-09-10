@@ -129,6 +129,23 @@ title: "Mi Portafolio"
             animation: pulse 2s infinite;
             z-index: -1; /* Colocar detrás del contenido */
         }
+        .download-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 18px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .download-btn:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
         @keyframes pulse {
             0% {
                 transform: scale(1);
@@ -279,7 +296,13 @@ title: "Mi Portafolio"
                 <div class="profile-description">
                     <p>Hola, soy Ramón, tengo 20 años y tengo experiencia en el desarrollo de aplicaciones orientadas a la gestión de ventas e inventarios.</p>
                     <p>Me considero una persona analítica, responsable y con gran interés en aprender nuevas herramientas y frameworks como Astro y React. Mi objetivo es seguir desarrollando soluciones tecnológicas que optimicen procesos y aporten valor a las empresas.</p>
+
+                    <!-- Botón para descargar el PDF -->
+                    <a href="/curriculum/CV.pdf" download class="download-btn">
+                        📄 Descargar CV
+                    </a>
                 </div>
+
             </div>
         </div>
     </div>
