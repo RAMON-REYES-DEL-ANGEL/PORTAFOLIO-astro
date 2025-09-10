@@ -143,32 +143,43 @@ title: "Mi Portafolio"
                 opacity: 0.5;
             }
         }
-        @media (max-width: 600px) {
-            .container {
-                padding: 15px; /* Menos padding en pantallas pequeñas */
+        @media (max-width: 768px) {
+            .profile-container {
+                flex-direction: column; /* Apilar imagen + info */
+                align-items: center; /* Centrar contenido */
+                text-align: center; /* Centrar texto también */
             }
+
+            .profile-description {
+                max-width: 90%; /* Que no se extienda demasiado */
+                margin: 15px 0 0 0; /* Separación arriba, sin margen izquierdo */
+                text-align: justify; /* Mejor legibilidad en móviles */
+            }
+
+            .social-icons {
+                flex-wrap: wrap; /* Permitir que los íconos bajen si no caben */
+                gap: 10px; /* Reducir espacio entre íconos */
+                margin-top: 15px;
+            }
+
+            .project {
+                width: 100%; /* Proyectos ocupan todo el ancho */
+                margin-bottom: 15px; /* Espacio entre proyectos */
+            }
+
+            .projects-container {
+                flex-direction: column; /* Apilar proyectos */
+                align-items: center; /* Centrar proyectos */
+            }
+
             h1 {
-                font-size: 2.5rem; /* Ajustar tamaño de fuente en móviles */
+                font-size: 1.8rem;
             }
             h2 {
-                font-size: 1.5rem; /* Ajustar tamaño de fuente en móviles */
-            }
-            .profile-container {
-                flex-direction: column; /* Cambiar a columna en pantallas pequeñas */
-                align-items: center; /* Centrar elementos */
-            }
-            .profile-description {
-                max-width: 100%; /* Ancho completo en móviles */
-                margin-left: 0; /* Sin margen en móviles */
-            }
-            .projects-container {
-                flex-direction: column; /* Cambiar a columna en móviles */
-            }
-            .project {
-                width: 100%; /* Ancho completo en móviles */
-                margin-bottom: 10px; /* Margen inferior entre proyectos */
+                font-size: 1.2rem;
             }
         }
+
 
         .tech-stack {
                 display: flex;
@@ -242,6 +253,9 @@ title: "Mi Portafolio"
         <!-- Foto de perfil y enlaces -->
         <div class="profile-container">
             <img src="/images/Captura.jpg" alt="Foto de perfil" />
+
+            
+
             <div>
                 <div class="social-icons">
                     <a href="mailto:ramonreyesdelangel@gmail.com">
